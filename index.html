@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HIPL</title>
+
+    <style>
+        html {
+            min-width: 400px;
+        }
+        #headbar {
+            width: 100%;
+            min-width: 100px;
+        }
+        h1 {
+            text-align: justify;
+            display: inline-block;
+            width: 100%;
+        }
+        h1:after {
+            content: "";
+            display: inline-block;
+            width: 100%;
+        }
+
+        code {
+            white-space: pre-wrap;
+            display: block;
+            background-color: #efe;
+        }
+        .section {
+            background-color: #ded;
+            padding: 2px 5px;
+            margin: 5px;
+            border-left: solid 3px #aba;
+        }
+
+    </style>
+</head>
+<body>
+<div id="headbar">
+<h1>H I P L</h1>
+</div>
+
+<div id="content">
+    <div class="section">
+        <h4 id="hello+world">Hello World</h4>
+        <code>
+StandardIO.println("Hello World!");
+        
+        </code>
+    </div>
+
+    <div class="section">
+        <h4 id="kegger">Kegger</h4>
+        <code>
+#import static hipl.lang.StandardIO.*
+
+int age = readInt();
+println(age >= 21 ? "Kegger" : "Milk");
+        
+        </code>
+    </div>
+
+    <div class="section">
+        <h4 id="classes">Classes</h4>
+        <code>
+#import static hipl.lang.StandardIO.*
+
+class Citizen {
+    string name;
+    int age;
+
+    String foo() {
+        return "${name} can ${age>21?'have a kegger':'drink milk'}.";
+    }
+
+}
+
+Citizen c = new Citizen(name: "Kane", age: StandardIO.readInt());
+
+println(kane.foo());
+
+        </code>
+    </div>
+
+    <div class="section">
+        <h4 id="custom+operators">Custom Operators</h4>
+        <code>
+class Course {
+    List&lt;Teacher&gt; teachers;
+    List&lt;Student&gt; students;
+
+    #operator(mutate:false) +$0
+    Course merge(Course other) {
+        teachers ++= other.teachers;
+        students ++= other.students;
+    }
+
+    #operator(mutate:false) +$0
+    Course addTeacher(Teacher newTeacher) {
+        students += newTeacher;
+    }
+
+    #operator(mutate:false) +$0
+    Course addStudent(Student newStudent) {
+        students += newStudent;
+    }
+}
+ 
+Student alpha   = new Student(name: "Alpha");
+Student bravo   = new Student(name: "Bravo");
+Student charlie = new Student(name: "Charlie");
+
+Course course0 = new Course();
+course0 += alpha; // Add students
+course0 += bravo;
+
+Course course1 = new Course();
+course1 += charlie; // Add student
+
+course0 + course1; // Merge courses
+        </code>
+    </div>
+</div> 
+
+</body>
+</html>
